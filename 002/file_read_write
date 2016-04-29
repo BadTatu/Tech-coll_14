@@ -1,0 +1,43 @@
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	FILE *fi, *fo;
+	ofstream foo;
+	ifstream fii;
+	fii.open("D:\\Desktop\\file_read_write\\file_read_write\\input1.txt",ios_base::in);
+	foo.open("D:\\Desktop\\file_read_write\\file_read_write\\output1.txt",ios_base::out);
+	char str[50] , *n;
+	double s=0;
+	char *r=" ";//разделитель
+	if ((fi=fopen("D:\\Desktop\\file_read_write\\file_read_write\\input.txt","r"))==0){
+	cout<<"Error. Not input file"<<endl; return 1;
+	}
+	if ((fo=fopen("D:\\Desktop\\file_read_write\\file_read_write\\output.txt","w"))==0){
+	cout<<"Error. Not output file"<<endl; return 1;
+	}
+	
+	fii.getline(str,50);
+	
+	while (fgets(str,50,fi)){
+	n=strtok(str,r);
+	s=0;
+	while(n){
+	cout<<n<<" ";
+	s+=atof(n);
+	n=strtok(NULL,r);
+		}
+	cout<<"Sum = "<<s<<endl;
+	foo<<s<<endl;
+	fprintf(fo,"Sum= %f\n",s);
+	
+	//cout<<str<<endl;
+	}
+	fclose(fo);
+	fclose(fi);
+	return 0;
+}
+
