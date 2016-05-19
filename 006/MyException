@@ -1,0 +1,36 @@
+#include "stdafx.h"
+#include <exception>
+#include <iostream>
+using namespace std;
+
+class MyException {
+char *value;
+public:
+	MyException() ;
+	MyException(const char*) ;
+	MyException& operator=(const MyException&);
+	virtual ~MyException(){};
+	virtual const char* what();
+};
+MyException::MyException(const char* InputValue){
+	value = new char[strlen(InputValue) + 1];
+	strcpy(value, InputValue);
+}
+const char* MyException::what(){
+	return value;
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int i;
+	cin >> i;
+	try{
+		if (i == 13) { MyException err = MyException("Ahtung"); throw err; }
+	}
+	catch (MyException &err){
+		cout << err.what()<<endl;
+	}
+	cout << "The programm ends\n";
+	return 0;
+}
+
